@@ -3,9 +3,8 @@
 #include <iostream>
 
 SCENARIO("ctor1", "[ctor1]"){
-// 	  shared_ptr<int> sp;
-// 	  REQUIRE(!sp.get());
-    REQUIRE(true);
+	  shared_ptr<int> sp;
+	  REQUIRE(!sp.get());
 }
 
 // SCENARIO("ctor2", "[ctor2]"){
