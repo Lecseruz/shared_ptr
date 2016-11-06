@@ -15,7 +15,7 @@ SCENARIO("ctor2", "[ctor2]"){
 
 SCENARIO("ctor3", "[ctor3]"){
 	  shared<int> sp1(new int(7));
-	  sharedr<int> sp2 = sp1;
+	  shared<int> sp2 = sp1;
 	  REQUIRE(*sp2 == 7);
 	  REQUIRE(sp2.use_count() == 2);
 }
@@ -28,8 +28,8 @@ SCENARIO("ctor4", "[ctor4]"){
 }
 
 SCENARIO("prisv1", "[prisv1]"){
-	  sharedr<int> sp1(new int(7));
-	  sharedr<int> sp2; 
+	  shared<int> sp1(new int(7));
+	  shared<int> sp2; 
 	  sp2 = sp1;
 	  REQUIRE(*sp2 == 7);
 	  REQUIRE(sp2.use_count() == 2);
@@ -52,7 +52,7 @@ SCENARIO("swap", "[swap]"){
 }
 
 SCENARIO("reset", "[reset]"){
-	  sharedr<int> sp(new int(7));
+	  shared<int> sp(new int(7));
 	  sp.reset(nullptr);
 	  REQUIRE(!sp.get());
 }
@@ -69,7 +69,7 @@ SCENARIO("op_CTPEJlO4KA", "op_CTPEJlO4KA[]"){
 		tmp(int x) : a1(x){}
 	};
 	tmp a(7);
-	shared_ptr<tmp> sptr1=make_shared<tmp>(std::move(a));
+	shared<tmp> sptr1=make_shared<tmp>(std::move(a));
 	REQUIRE(sptr1->a1 == 7);
 }
 
@@ -80,8 +80,8 @@ SCENARIO("op_3BE3DO4KA", "[op_3BE3DO4KA]"){
 
 SCENARIO("countref", "[countref]"){
 	  shared<int> sp1(new int(7));
-	  sharedr<int> sp2 = sp1;
-	  sharedr<int> sp3;
+	  shared<int> sp2 = sp1;
+	  shared<int> sp3;
 	  sp3 = sp2;
 	  REQUIRE(sp2.use_count() == 3);
 }
