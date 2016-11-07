@@ -66,9 +66,16 @@ shared<T>::shared(shared<T> &&other)
 
 
 template <class T>
-shared<T>::~shared(){
-    reset(nullptr);
-    --(*counter);
+shared<T>::~shared() {
+    if (counter != nullptr)
+    {
+        if (*counter == 1) {
+            delete ptr;
+            delete counter;
+        }      else{
+            --(*counter);
+        };
+    }
 }
 
 template <class T>
@@ -88,12 +95,11 @@ auto shared<T>::operator=(shared &&other) -> shared & {
 
 template <class T>
 void shared<T>::reset(T *tmp) {
-    delete ptr;
-    delete counter;
+    this->~shared();
+
     ptr = tmp;
     counter = new size_t(1);
 }
-
 template <class T>
 auto shared<T>::get() const-> T * {
     return ptr;
