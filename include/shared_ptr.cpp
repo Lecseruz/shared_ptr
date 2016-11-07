@@ -7,6 +7,7 @@ public:
     shared(T* ptr ); /*strong*/
     shared(const shared &); /*noexcept*/
     shared(shared &&); /* noexcept */
+    ~shared();/*noexcept */
     auto operator=(const shared &) /*noexcept*/ -> shared&;
     auto operator=(shared &&) /*noexcept*/ -> shared&;
     auto operator*() const /* strong */ -> T&;
@@ -61,6 +62,13 @@ shared<T>::shared(shared<T> &&other)
 {
     other.counter = nullptr;
     other.ptr = nullptr;
+}
+
+
+template <class T>
+shared<T>::~shared(){
+    reset(nullptr);
+    --(*counter);
 }
 
 template <class T>
