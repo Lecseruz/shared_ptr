@@ -89,7 +89,10 @@ auto shared<T>::operator=(const shared &other) -> shared & {
 
 template <class T>
 auto shared<T>::operator=(shared &&other) -> shared & {
-    if (this != &other) this->swap(other);
+    if (this != &other) {
+        shared<T> tmp(std::move(other));
+        this->swap(tmp);
+    }
     return *this;
 }
 
