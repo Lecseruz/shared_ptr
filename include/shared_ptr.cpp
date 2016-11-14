@@ -98,10 +98,20 @@ auto shared<T>::operator=(shared &&other) -> shared & {
 
 template <class T>
 void shared<T>::reset(T *tmp) {
-    this->~shared();
-
-    ptr = tmp;
-    counter = new size_t(1);
+    if (ptr != tmp) {
+        if (*counter == 1) {
+            delete ptr;
+            delete counter;
+        } else {
+            --(*counter);
+        }
+        ptr = tmp;
+        if (ptr != nullptr) {
+            counter = new size_t(1);
+        } else {
+            counter = nullptr;
+        }
+    }
 }
 template <class T>
 auto shared<T>::get() const-> T * {
