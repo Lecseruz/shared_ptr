@@ -1,4 +1,5 @@
 #include <iostream>
+#include <exception>
 
 template <class T>
 class shared{
@@ -126,6 +127,9 @@ auto shared<T>::swap(shared &other) -> void {
 
 template <class T>
 auto shared<T>::operator*() const -> T& {
+    if (!ptr) {
+        throw std::logic_error("error: ptr = nullptr");
+    }
     return *ptr;
 }
 
@@ -141,6 +145,9 @@ auto shared<T>::use_count() const -> size_t {
 
 template <class T>
 auto shared<T>::operator->() const -> T* {
+    if (!ptr) {
+        throw std::logic_error("error: ptr = nullptr");
+    }
     return ptr;
 }
 
