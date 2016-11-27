@@ -116,9 +116,6 @@ void shared<T>::reset(T *tmp) {
 }
 template <class T>
 auto shared<T>::get() const-> T * {
-    if (!ptr) {
-        throw std::logic_error("error: ptr = nullptr");
-    }
     return ptr;
 }
 
