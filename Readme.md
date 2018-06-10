@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/magomedgadjiev/shared_ptr.svg?branch=master)](https://travis-ci.org/magomedgadjiev/shared_ptr)
 
-#Shared_ptr
+# Shared_ptr
 Manages the storage of a pointer, providing a limited garbage-collection facility, possibly sharing that management with other objects.
 
 Objects of shared_ptr types have the ability of taking ownership of a pointer and share that ownership: once they take ownership, the group of owners of a pointer become responsible for its deletion when the last one of them releases that ownership.
